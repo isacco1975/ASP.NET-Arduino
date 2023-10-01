@@ -137,7 +137,7 @@ Module TCP_SerialDriver
                 AddHandler(tcpServer.getMessage), AddressOf MessageReceived
                 AddHandler(tcpServer.clientLogout), AddressOf ClientExited
                 clientList.Add(tcpServer)
-                'Console.WriteLine("... A client connected")
+                Console.WriteLine("... A client connected")
 
                 listener.BeginAcceptTcpClient(New AsyncCallback(AddressOf AcceptClient), listener)
             End If
@@ -158,7 +158,10 @@ Module TCP_SerialDriver
             Console.WriteLine("Incoming TCP message: " & str.Replace(Convert.ToChar(0), ""))
             SendData(str.Replace(Convert.ToChar(0), ""))
             Thread.Sleep(500)
-            rClient.Close()
+
+            If httpDataOnly = "1" Then
+                rClient.Close()
+            End If
         Catch ex As Exception
             Throw ex
         End Try
@@ -186,7 +189,7 @@ Module TCP_SerialDriver
     ''' <param name="client"></param>
     Sub ClientExited(ByVal client As TCP_Server)
         clientList.Remove(client)
-        'Console.WriteLine("... A client disconnected")
+        Console.WriteLine("... A client disconnected")
     End Sub
 
 End Module

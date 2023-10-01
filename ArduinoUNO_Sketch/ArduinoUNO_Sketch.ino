@@ -18,7 +18,7 @@ String incomingMessage;
 
 void setup()
 {  
-   Serial.begin(115200);
+   Serial.begin(1200);
 }
 
 void loop()
